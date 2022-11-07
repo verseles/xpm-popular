@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 echo script start
 
-
-
-
-
 readonly xCHANNEL="stable"
 readonly xNAME="google-chrome"
 readonly xVERSION="87.0.4280.88"
@@ -14,24 +10,20 @@ readonly xURL="https://www.google.com/chrome/"
 readonly xARCH=('x86_64')
 readonly xLICENCE="https://www.google.com/chrome/terms/"
 
-readonly xDOWNLOAD_URL="https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
+install_debian() {
+	$1 install -y "$xNAME-$xCHANNEL"
+}
 
-readonly xDEPENDS=""
-
-#install_debian() {
-#
-#}
-
-#remove_debian() {
-#	#	$XPM remove google-chrome-stable
-#}
+remove_debian() {
+	$ remove google-chrome-stable
+}
 
 install_archlinux() {
-	$xAUR google-chrome
+	$1 google-chrome
 }
 
 uninstall_archlinux() {
-	$xAUR -R google-chrome
+	$1 -R google-chrome
 }
 
 validate() {
@@ -39,7 +31,3 @@ validate() {
 	echo validating...
 	"$xNAME-$xCHANNEL" --version
 }
-
-validate
-
-echo script end
