@@ -2,27 +2,19 @@
 # shellcheck disable=SC2034
 
 readonly xCHANNEL="stable"
-readonly xNAME="micro"
-readonly xVERSION="2.0.11"
-readonly xTITLE="Micro Text Editor"
-readonly xDESC="A modern and intuitive terminal-based text editor"
-readonly xURL="https://micro-editor.github.io"
-readonly xARCH=('x86_64' 'i686' 'armv6h' 'armv7h' 'aarch64')
-readonly xLICENSE="https://raw.githubusercontent.com/zyedidia/micro/v$xVERSION/LICENSE"
-readonly xPROVIDES=("micro")
+readonly xNAME="rclone"
+readonly xVERSION="1.60.0"
+readonly xTITLE="rclone"
+readonly xDESC="Sync files to and from Google Drive, S3, Swift, Cloudfiles, Dropbox and Google Cloud Storage"
+readonly xURL="https://rclone.org"
+readonly xARCH=('x86_64' 'armv6h' 'armv7h' 'aarch64')
+readonly xLICENSE="https://raw.githubusercontent.com/$xNAME/$xNAME/master/COPYING"
+readonly xPROVIDES=("rclone")
 yBETA=false # will be true if request a beta version
 yDEV=false  # will be true if request a dev/alpha version
-# @TODO if a method is equal to true, assume the default command using $xNAME as the package name (e.g. apt install $xNAME)
-
-# optional methods install_debian, remove_debian, install_archlinux, uninstall_archlinux, install_fedora, remove_fedora, install_snap, remove_snap, install_appimage, remove_appimage, install_centos, remove_centos
 
 install_any() {
-	cd /usr/local/bin/ || exit 1
-	GETMICRO_REGISTER=yes bash <(curl -sL https://getmic.ro)
-}
-
-remove_any() {
-	rm -rf /usr/local/bin/micro
+	curl -sL https://rclone.org/install.sh | sudo bash
 }
 
 install_apt() { # $1 means an executable compatible with apt (Debian, Ubuntu)

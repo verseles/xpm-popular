@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-echo script start
+# shellcheck disable=SC2034
+
+# EXAMPLE OUT-OF-DATE, CHECK micro/micro.bash FOR MOST RECENT EXAMPLE
+# EXAMPLE OUT-OF-DATE, CHECK micro/micro.bash FOR MOST RECENT EXAMPLE
+# EXAMPLE OUT-OF-DATE, CHECK micro/micro.bash FOR MOST RECENT EXAMPLE
+# EXAMPLE OUT-OF-DATE, CHECK micro/micro.bash FOR MOST RECENT EXAMPLE
+# EXAMPLE OUT-OF-DATE, CHECK micro/micro.bash FOR MOST RECENT EXAMPLE
 
 readonly xCHANNEL="stable"
 readonly xNAME="google-chrome"
