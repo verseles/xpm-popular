@@ -37,7 +37,7 @@ install_pacman() { # $1 means an executable compatible with pacman (Arch Linux)
 	$1 -S --noconfirm $xNAME
 }
 
-uninstall_pacman() {
+remove_pacman() {
 	$1 -R --noconfirm $xNAME
 }
 
