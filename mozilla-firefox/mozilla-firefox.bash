@@ -2,17 +2,17 @@
 # shellcheck disable=SC2034
 # USE THIS FILE AS TEMPLATE FOR YOUR SCRIPT
 
-readonly xNAME="micro"
-readonly xVERSION="2.0.11"
-readonly xTITLE="Micro Text Editor"
-readonly xDESC="A modern and intuitive terminal-based text editor"
-readonly xURL="https://micro-editor.github.io"
-readonly xARCH=('x86_64' 'i686' 'armv6h' 'armv7h' 'aarch64')
-readonly xLICENSE="https://raw.githubusercontent.com/zyedidia/micro/v$xVERSION/LICENSE"
-readonly xPROVIDES=("micro")
+readonly xNAME="firefox"
+readonly xVERSION="109.0"
+readonly xTITLE="Mozilla Firefox Browser"
+readonly xDESC="Mozilla Firefox is a free and open-source web browser developed for Windows, macOS, Linux, and BSD operating systems."
+readonly xURL="https://www.mozilla.org/en-US/firefox/"
+readonly xARCH=('x86_64' 'i686')
+readonly xLICENSE="https://www.mozilla.org/en-US/about/legal/terms/mozilla/"
+readonly xPROVIDES=("firefox")
 
 # variables which is dinamically set
-# $yCHANNEL
+# $yCHANNEL, $yARCH
 # the default channel is empty, which means the latest stable version
 # user can change using -c or --channel flag
 # $isSnap, $isFlatpack, $isAppimage
@@ -24,10 +24,7 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 }
 install_any() { # soon we will have a cross-platform command to get files and checksum
 	# shellcheck disable=SC2046
-	cd /usr/local/bin/ &&
-		gmcr="$(curl https://getmic.ro)" &&
-		[ $(echo "$gmcr" | shasum -a 256 | cut -d' ' -f1) = ac6082380e3436a7baf36c16aba348a5163ee75904704cdf097c18cff9e83407 ] &&
-		echo "$gmcr" | sudo sh
+curl https://download-installer.cdn.mozilla.net/pub/firefox/releases/$xVERSION/linux-$yARCH/pt-BR/firefox-$xVERSION.tar.bz2
 }
 
 remove_any() {
@@ -62,7 +59,7 @@ install_pack() { # $1 means an executable compatible with snap, flatpack or appi
 	# $isSnap, $isFlatpack, $isAppimage are available as boolean
 	# shellcheck disable=SC2154
 	if [[ $isFlatpack == true ]]; then   # actually micro is not available on flatpack
-		$1 install $xNAME                   # with --assumeyes
+		$1 install flathub org.mozilla.firefox                   # with --assumeyes
 	elif [[ $isAppimage == true ]]; then # actually micro is not available on appimage
 		$1 install $xNAME
 	else
