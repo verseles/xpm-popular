@@ -10,8 +10,6 @@ readonly xURL="https://rclone.org"
 readonly xARCH=('x86_64' 'armv6h' 'armv7h' 'aarch64')
 readonly xLICENSE="https://raw.githubusercontent.com/$xNAME/$xNAME/master/COPYING"
 readonly xPROVIDES=("rclone")
-yBETA=false # will be true if request a beta version
-yDEV=false  # will be true if request a dev/alpha version
 
 install_any() {
 	curl -sL https://rclone.org/install.sh | sudo bash
