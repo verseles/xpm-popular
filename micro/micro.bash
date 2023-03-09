@@ -13,10 +13,11 @@ readonly xPROVIDES=("micro")
 
 # variables which is dinamically set
 # $yCHANNEL
-# the default channel is empty, which means the latest stable version
-# user can change using -c or --channel flag
+#  the default channel is empty, which means the latest stable version
+#  user can change using -c or --channel flag
 # $isSnap, $isFlatpack, $isAppimage
-# only when using snap, flatpack or appimage, these variables are available as boolean
+#  only when using snap, flatpack or appimage, these variables are available as boolean
+# $XPM is the path to xpm executable
 
 # optional methods install_apt, remove_apt, install_pacman, remove_pacman, install_dnf, remove_dnf, install_pack, remove_pack, install_yum, remove_yum, install_choco, remove_choco, install_brew, remove_brew, install_zypper, remove_zypper, install_android, remove_android, validate
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
@@ -24,14 +25,14 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 }
 install_any() { # soon we will have a cross-platform command to get files and checksum
 	# shellcheck disable=SC2046
-	cd /usr/local/bin/ &&
-		gmcr="$(curl https://getmic.ro)" &&
-		[ $(echo "$gmcr" | shasum -a 256 | cut -d' ' -f1) = ac6082380e3436a7baf36c16aba348a5163ee75904704cdf097c18cff9e83407 ] &&
-		echo "$gmcr" | sudo sh
+	local installer
+	installer=$($XPM get https://getmic.ro --exec)
+	sh "$installer"
+	$XPM file bin $xNAME --sudo --exec
 }
 
 remove_any() {
-	sudo rm -f /usr/local/bin/micro
+	$XPM file unbin $xNAME --sudo --force
 }
 
 install_apt() {    # $1 means an executable compatible with apt (Debian, Ubuntu)
