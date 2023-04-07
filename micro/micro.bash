@@ -7,7 +7,7 @@ readonly xVERSION="2.0.11"
 readonly xTITLE="Micro Text Editor"
 readonly xDESC="A modern and intuitive terminal-based text editor"
 readonly xURL="https://micro-editor.github.io"
-readonly xARCH=('x86_64' 'i686' 'armv6h' 'armv7h' 'aarch64')
+readonly xARCH=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="https://raw.githubusercontent.com/zyedidia/micro/v$xVERSION/LICENSE"
 readonly xPROVIDES=("micro")
 
