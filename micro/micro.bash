@@ -7,9 +7,9 @@ readonly xVERSION="2.0.11"
 readonly xTITLE="Micro Text Editor"
 readonly xDESC="A modern and intuitive terminal-based text editor"
 readonly xURL="https://micro-editor.github.io"
+readonly xARCH=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="https://raw.githubusercontent.com/zyedidia/micro/v$xVERSION/LICENSE"
 readonly xPROVIDES=("micro")
-declare -r xARCH=([linux_x86_64]=linux64 [linux_i386]=linux32 [linux_armv7l]=linux-arm [linux_aarch64]=linux-arm64 [darwin_arm64]=macos-arm64 [darwin_x86_64]=macos [win32]=win32 [win64]=win64 [freebsd_x86_64]=freebsd64 [freebsd_i386]=freebsd32 [openbsd_x86_64]=openbsd64 [openbsd_i386]=openbsd32 [netbsd_x86_64]=netbsd64 [netbsd_i386]=netbsd32)
 
 # variables which is dinamically set
 # $yCHANNEL
@@ -18,7 +18,6 @@ declare -r xARCH=([linux_x86_64]=linux64 [linux_i386]=linux32 [linux_armv7l]=lin
 # $isSnap, $isFlatpack, $isAppimage
 #  only when using snap, flatpack or appimage, these variables are available as boolean
 # $XPM is the path to xpm executable
-# $yARCH is the architecture of the current system
 
 # optional methods install_apt, remove_apt, install_pacman, remove_pacman, install_dnf, remove_dnf, install_pack, remove_pack, install_yum, remove_yum, install_choco, remove_choco, install_brew, remove_brew, install_zypper, remove_zypper, install_android, remove_android, validate
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
