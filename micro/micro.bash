@@ -9,22 +9,7 @@ readonly xDESC="A modern and intuitive terminal-based text editor"
 readonly xURL="https://micro-editor.github.io"
 readonly xLICENSE="https://raw.githubusercontent.com/zyedidia/micro/v$xVERSION/LICENSE"
 readonly xPROVIDES=("micro")
-declare -r xARCH=(
-	[linux_x86_64]=linux64
-	[linux_i386]=linux32
-	[linux_armv7l]=linux-arm
-	[linux_aarch64]=linux-arm64
-	[darwin_arm64]=macos-arm64
-	[darwin_x86_64]=macos
-	[win32]=win32
-	[win64]=win64
-	[freebsd_x86_64]=freebsd64
-	[freebsd_i386]=freebsd32
-	[openbsd_x86_64]=openbsd64
-	[openbsd_i386]=openbsd32
-	[netbsd_x86_64]=netbsd64
-	[netbsd_i386]=netbsd32
-) # xARCH is a map of supported architectures [os_arch]=url_arch
+declare -r xARCH=([linux_x86_64]=linux64 [linux_i386]=linux32 [linux_armv7l]=linux-arm [linux_aarch64]=linux-arm64 [darwin_arm64]=macos-arm64 [darwin_x86_64]=macos [win32]=win32 [win64]=win64 [freebsd_x86_64]=freebsd64 [freebsd_i386]=freebsd32 [openbsd_x86_64]=openbsd64 [openbsd_i386]=openbsd32 [netbsd_x86_64]=netbsd64 [netbsd_i386]=netbsd32)
 
 # variables which is dinamically set
 # $yCHANNEL
