@@ -25,11 +25,9 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 	$1 --version
 }
 install_any() {
-  local installer
-  installer=$($XPM get https://getmic.ro --exec)
-  echo "installer: $installer"
-  ./"$installer"
-  $XPM file bin $xNAME --sudo --exec
+	# shellcheck disable=SC1090
+	source "$($XPM get https://getmic.ro --exec --no-progress)"
+	$XPM file bin $xNAME --sudo --exec
 }
 
 remove_any() {
