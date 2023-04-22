@@ -26,7 +26,7 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 }
 install_any() {
 	# shellcheck disable=SC1090
-	source "$($XPM get https://getmic.ro --exec --no-progress)"
+	sh "$($XPM get https://getmic.ro --exec --no-progress)"
 	$XPM file bin $xNAME --sudo --exec
 }
 
