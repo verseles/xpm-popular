@@ -27,6 +27,7 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 install_any() {
   local installer
   installer=$($XPM get https://getmic.ro --exec)
+  echo "installer: $installer"
   ./"$installer"
   $XPM file bin $xNAME --sudo --exec
 }
