@@ -24,12 +24,12 @@ readonly xPROVIDES=("micro")
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
 	$1 --version
 }
-install_any() { # soon we will have a cross-platform command to get files and checksum
-	# shellcheck disable=SC2046
-	local installer
-	installer=$($XPM get https://getmic.ro --exec)
-	sh "$installer"
-	$XPM file bin $xNAME --sudo --exec
+install_any() {
+  local installer
+  installer=$($XPM get https://getmic.ro --exec)
+  # shellcheck disable=SC1090
+  source "$installer"
+  $XPM file bin $xNAME --sudo --exec
 }
 
 remove_any() {
@@ -82,14 +82,6 @@ remove_pack() {
 	else
 		$1 remove $xNAME
 	fi
-}
-
-install_yum() {    # $1 means an executable compatible with yum (CentOS). Prefers dnf.
-	$1 install $xNAME # $1 with -y
-}
-
-remove_yum() { # $1 means yum compatible with -y
-	$1 remove -y $xNAME
 }
 
 install_choco() {  # $1 means an executable compatible  with chocolatey (Windows)
