@@ -18,6 +18,7 @@ readonly xPROVIDES=("micro")
 # $isSnap, $isFlatpack, $isAppimage
 #  only when using snap, flatpack or appimage, these variables are available as boolean
 # $XPM is the path to xpm executable
+# $ySUDO is the sudo command, if available. Most commands already add sudo if available
 
 # optional methods install_apt, remove_apt, install_pacman, remove_pacman, install_dnf, remove_dnf, install_pack, remove_pack, install_yum, remove_yum, install_choco, remove_choco, install_brew, remove_brew, install_zypper, remove_zypper, install_android, remove_android, validate
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
@@ -36,26 +37,26 @@ remove_any() {
 }
 
 install_apt() {    # $1 means an executable compatible with apt (Debian, Ubuntu)
-	$1 install $xNAME # with -y
+	$1 install $xNAME # with -y, with sudo if available
 }
 
-remove_apt() {    # $1 means apt compatible
-	$1 remove $xNAME # with -y
+remove_apt() {    # $1 means apt compatible, with sudo if available
+	$1 remove $xNAME # with -y, with sudo if available
 }
 
 install_pacman() { # $1 means an executable compatible with pacman (Arch Linux)
-	$1 -S $xNAME      # with --noconfirm
+	$1 -S $xNAME      # with --noconfirm, with sudo if available
 }
 
 remove_pacman() { # $1 means pacman compatible
-	$1 -R $xNAME     # with --noconfirm
+	$1 -R $xNAME     # with --noconfirm, with sudo if available
 }
 
 install_dnf() {    # $1 means an executable compatible with dnf (Fedora)
-	$1 install $xNAME # with -y
+	$1 install $xNAME # with -y, with sudo if available
 }
 
-remove_dnf() { # $1 means dnf compatible with -y
+remove_dnf() { # $1 means dnf compatible with -y, with sudo if available
 	$1 remove -y $xNAME
 }
 
