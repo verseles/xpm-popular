@@ -102,11 +102,11 @@ remove_brew() {
 }
 
 install_zypper() { # $1 means an executable compatible with zypper (openSUSE) or zypper with -y
-	$1 install $xNAME-editor # with --non-interactive, with sudo if available
+	$1 install "$xNAME-editor" # with --non-interactive, with sudo if available
 }
 
 remove_zypper() { # $1 means zypper compatible with -y
-	$1 remove $xNAME-editor # with --non-interactive, with sudo if available
+	$1 remove "$xNAME-editor" # with --non-interactive, with sudo if available
 }
 
 install_android() { # $1 means an executable compatible with pkg (Termux Android) with -y
