@@ -24,6 +24,7 @@ readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'termux')
 #  these boolean variables are set to true if the package manager is available and selected
 # $XPM is the path to xpm executable
 # $ySUDO is the sudo command, if available. Most commands already add sudo if available
+# $yBIN is the path to first bin folder on PATH.
 
 # the only required function is validate. install_any and remove_any are very important, but not required.
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME

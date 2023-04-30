@@ -19,13 +19,21 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 }
 
 install_any() {
-	# shellcheck disable=SC1090
-	local git=$($XPM get https://www.kernel.org/pub/software/scm/git/git-$xVERSION.tar.xz)
-	echo "$git"
+	local git git_install_dir
+	git=$($XPM get https://www.kernel.org/pub/software/scm/git/git-$xVERSION.tar.xz --no-progress --name=git.tar.xz)
+	tar -xvf "$git"
+	cd git-* || exit
+	git_install_dir=$(pwd)
+	make configure
+	./configure --prefix="${yBIN/%\/bin/}"
+	make
+	$ySUDO make install
+	cd .. || exit
+	$XPM file delete -rf "$git" "$git_install_dir"
 }
 
 remove_any() {
-	$XPM file unbin $xNAME --sudo --force
+	$XPM file unbin $yBIN/$xNAME --sudo --force
 }
 
 install_swupd() {        # $1 means an executable compatible with swupd (Clear Linux), with -y, with sudo if available
