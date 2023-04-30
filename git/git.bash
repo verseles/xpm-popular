@@ -36,12 +36,12 @@ remove_any() {
 	$XPM file unbin $yBIN/$xNAME --sudo --force
 }
 
-install_swupd() {        # $1 means an executable compatible with swupd (Clear Linux), with -y, with sudo if available
-	$1 bundle-add dev-utils # we don't really need dev-utils, but it's just an example
-	install_any
+install_swupd() { # $1 means an executable compatible with swupd (Clear Linux) with sudo if available
+	pwd
+	whoami
+	$1 bundle-add -y git
 }
 
-remove_swupd() { # $1 means swupd compatible with -y, with sudo if available
-	$1 bundle-remove --orphans
-	remove_any
+remove_swupd() { # $1 means swupd compatible, with sudo if available
+	$1 bundle-remove -y git
 }
