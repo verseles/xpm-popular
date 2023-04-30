@@ -14,7 +14,7 @@ readonly xPROVIDES=("micro")
 # Here you can inform if this package is well-known to some package manager and is installed using xNAME
 # it is good for batch install and remove, when informed here, you can safely remove install_(PM here)
 # and remove_(PM here) function. Example: readonly xDEFAULT='apt' let you remove install_apt and remove_apt
-readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'android')
+readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'termux')
 
 # variables which is dinamically set and available for use
 # $yCHANNEL
@@ -122,11 +122,11 @@ remove_zypper() { # $1 means zypper compatible with -y
 	$1 remove "$xNAME-editor" # with --non-interactive, with sudo if available
 }
 
-install_android() { # $1 means an executable compatible with pkg (Termux Android) with -y
+install_termux() { # $1 means an executable compatible with pkg (Termux Android) with -y
 	$1 install $xNAME # with -y, with sudo if available
 }
 
-remove_android() { # $1 means pkg compatible with -y
+remove_termux() { # $1 means pkg compatible with -y
 	$1 remove $xNAME  # with -y, with sudo if available
 }
 
