@@ -50,15 +50,6 @@ remove_apt() {    # $1 means apt compatible, with sudo if available
 	$1 remove $xNAME # with -y, with sudo if available
 }
 
-# pacman -Syu will be called before install_pacman and remove_pacman
-install_pacman() { # $1 means an executable compatible with pacman (Arch Linux)
-	$1 -S $xNAME      # with --noconfirm, with sudo if available
-}
-
-remove_pacman() { # $1 means pacman compatible
-	$1 -R $xNAME     # with --noconfirm, with sudo if available
-}
-
 # dnf update will be called before install_dnf and remove_dnf
 install_dnf() {    # $1 means an executable compatible with dnf (Fedora)
 	$1 install $xNAME # with -y, with sudo if available
@@ -72,7 +63,7 @@ remove_dnf() {       # $1 means dnf compatible with -y, with sudo if available
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
 	# $isSnap, $isFlatpack, $isAppimage are available as boolean
 	# shellcheck disable=SC2154
-	if [[ $isFlatpack == true ]]; then   # actually micro is not available on flatpack
+	if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
 		# $1 install $xNAME                   # with --assumeyes
 		return 1
 	elif [[ $isAppimage == true ]]; then # actually micro is not available on appimage
@@ -86,7 +77,7 @@ install_pack() { # $1 means an executable compatible with snap, flatpack or appi
 remove_pack() {
 	# $isSnap, $isFlatpack, $isAppimage are available as boolean
 	# shellcheck disable=SC2154
-	if [[ $isFlatpack == true ]]; then   # actually micro is not available on flatpack
+	if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
 		# $1 uninstall $xNAME                 # with --assumeyes
 		exit 1
 	elif [[ $isAppimage == true ]]; then # actually micro is not available on appimage
@@ -115,11 +106,11 @@ remove_brew() {
 	$1 remove $xNAME
 }
 
-install_zypper() { # $1 means an executable compatible with zypper (openSUSE) or zypper with -y
+install_zypper() {          # $1 means an executable compatible with zypper (openSUSE) or zypper with -y
 	$1 install "$xNAME-editor" # with --non-interactive, with sudo if available
 }
 
-remove_zypper() { # $1 means zypper compatible with -y
+remove_zypper() {          # $1 means zypper compatible with -y
 	$1 remove "$xNAME-editor" # with --non-interactive, with sudo if available
 }
 
@@ -128,10 +119,10 @@ install_termux() { # $1 means an executable compatible with pkg (Termux Android)
 }
 
 remove_termux() { # $1 means pkg compatible with -y
-	$1 remove $xNAME  # with -y, with sudo if available
+	$1 remove $xNAME # with -y, with sudo if available
 }
 
-install_swupd() { # $1 means an executable compatible with swupd (Clear Linux), with -y, with sudo if available
+install_swupd() {       # $1 means an executable compatible with swupd (Clear Linux), with -y, with sudo if available
 	$1 bundle-add go-basic # we don't really need go, but it's just an example
 	install_any
 }
