@@ -50,6 +50,15 @@ remove_apt() {    # $1 means apt compatible, with sudo if available
 	$1 remove $xNAME # with -y, with sudo if available
 }
 
+# pacman -Syu will be called before install_pacman and remove_pacman
+install_pacman() { # $1 means an executable compatible with pacman (Arch Linux)
+	$1 -S $xNAME      # with --noconfirm, with sudo if available
+}
+
+remove_pacman() { # $1 means pacman compatible
+	$1 -R $xNAME     # with --noconfirm, with sudo if available
+}
+
 # dnf update will be called before install_dnf and remove_dnf
 install_dnf() {    # $1 means an executable compatible with dnf (Fedora)
 	$1 install $xNAME # with -y, with sudo if available
