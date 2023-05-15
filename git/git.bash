@@ -11,7 +11,7 @@ readonly xARCH=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'mac
 readonly xLICENSE="https://raw.githubusercontent.com/git/git/v$xVERSION/COPYING"
 readonly xPROVIDES=("git")
 # The list of functions that use the default name (xNAME) on the package manager (for batch install)
-readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'zypper' 'emerge' 'urpmi' 'alpine' 'nix' 'termux')
+readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'zypper' 'emerge' 'urpmi' 'alpine' 'nix' 'termux' 'swupd')
 
 # the only required function is validate. install_any and remove_any are very important, but not required.
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
@@ -33,15 +33,5 @@ install_any() {
 }
 
 remove_any() {
-	$XPM file unbin $yBIN/$xNAME --sudo --force
-}
-
-install_swupd() { # $1 means an executable compatible with swupd (Clear Linux) with sudo if available
-	pwd
-	whoami
-	$1 bundle-add -y git
-}
-
-remove_swupd() { # $1 means swupd compatible, with sudo if available
-	$1 bundle-remove -y git
+	$XPM file unbin "$yBIN/$xNAME" --sudo --force
 }

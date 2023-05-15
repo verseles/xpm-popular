@@ -3,7 +3,7 @@
 # USE THIS FILE AS TEMPLATE FOR YOUR SCRIPT
 
 readonly xNAME="xpm"
-readonly xVERSION="0.19.0"
+readonly xVERSION="0.30.0"
 readonly xTITLE="xpm"
 readonly xDESC="Universal package manager for any unix-like distro, including macOS and Android"
 readonly xURL="https://xpm.link"
