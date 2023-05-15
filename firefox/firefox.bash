@@ -28,7 +28,7 @@ install_any() {
 remove_any() {
     $ySUDO rm -rf "/opt/$xNAME"
     $ySUDO rm -f "$yBIN/$xNAME"
-    #$XPM shortcut --remove="$xNAME"
+    $XPM shortcut --remove --name="$xNAME"
 }
 
 install_zypper() { # $1 means [sudo] zypper -y install [package]
