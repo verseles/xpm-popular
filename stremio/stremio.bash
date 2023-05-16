@@ -18,10 +18,19 @@ validate() {
 
 
 install_apt() {
-    local file
-    file="$($XPM get "https://dl.strem.io/shell-linux/v$xVERSION/$xNAME_$xVERSION-1_amd64.deb" --no-progress --no-user-agent --name="$xNAME-$xVERSION.deb")"
-    $ySUDO dpkg -i "$file"
-    $1 install -f
+    local installer, file_url, fdk_aac_deb, fdk_aac
+
+    $1 install nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
+
+    fdk_aac_url="http://archive.ubuntu.com/ubuntu/pool/multiverse/f/fdk-aac/libfdk-aac1_0.1.6-1_amd64.deb";
+    fdk_aac_deb="$($XPM get $fdk_aac_url --no-progress)"
+    $ySUDO dpkg -i "$fdk_aac_deb"
+
+    file_url="https://dl.strem.io/shell-linux/v$xVERSION/${xNAME}_${xVERSION}-1_amd64.deb"
+    installer="$($XPM get $file_url --no-progress --no-user-agent --name="${xNAME}_v${xVERSION}.deb")"
+    $ySUDO dpkg -i "$installer"
+
+    $1 install -f # stands for apt/apt-get --fix-broken install
 }
 
 remove_apt() {
