@@ -22,6 +22,9 @@ install_apt() {
     local fdk_aac_url="http://archive.ubuntu.com/ubuntu/pool/multiverse/f/fdk-aac/libfdk-aac1_0.1.6-1_amd64.deb"
     $ySUDO dpkg -i "$($XPM get $fdk_aac_url --no-progress)"
 
+    local libssl_url="http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.22_amd64.deb"
+    $ySUDO dpkg -i "$($XPM get $libssl_url --no-progress)"
+
     local file_url="https://dl.strem.io/shell-linux/v$xVERSION/${xNAME}_${xVERSION}-1_amd64.deb"
     $ySUDO dpkg -i "$($XPM get $file_url --no-progress)"
 
