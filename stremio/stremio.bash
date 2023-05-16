@@ -16,20 +16,6 @@ validate() {
     $1 --version
 }
 
-install_any() {
-    # local file
-    # file="$($XPM get "http://archive.mozilla.org/pub/firefox/releases/$xVERSION/linux-x86_64/en-US/firefox-$xVERSION.tar.bz2" --no-progress --no-user-agent --name="$xNAME-$xVERSION.tar.bz2")"
-    # $ySUDO mkdir -p "/opt/$xNAME"
-    # $ySUDO tar xvf "$file" -C "/opt"
-    # $ySUDO ln -sf "/opt/$xNAME/$xNAME" "$yBIN/$xNAME"
-    # $XPM shortcut --name="$xNAME" --path="$xNAME" --icon="/opt/$xNAME/browser/chrome/icons/default/default128.png" --description="$xDESC" --category="Network"
-}
-
-remove_any() {
-    # $ySUDO rm -rf "/opt/$xNAME"
-    # $ySUDO rm -f "$yBIN/$xNAME"
-    # $XPM shortcut --remove --name="$xNAME"
-}
 
 install_apt() {
     local file
