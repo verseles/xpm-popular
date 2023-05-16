@@ -16,19 +16,14 @@ validate() {
     $1 --version
 }
 
-
 install_apt() {
-    local installer, file_url, fdk_aac_deb, fdk_aac
+    $1 install --only-upgrade nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
 
-    $1 install nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
+    local fdk_aac_url="http://archive.ubuntu.com/ubuntu/pool/multiverse/f/fdk-aac/libfdk-aac1_0.1.6-1_amd64.deb"
+    $ySUDO dpkg -i "$($XPM get $fdk_aac_url --no-progress)"
 
-    fdk_aac_url="http://archive.ubuntu.com/ubuntu/pool/multiverse/f/fdk-aac/libfdk-aac1_0.1.6-1_amd64.deb";
-    fdk_aac_deb="$($XPM get $fdk_aac_url --no-progress)"
-    $ySUDO dpkg -i "$fdk_aac_deb"
-
-    file_url="https://dl.strem.io/shell-linux/v$xVERSION/${xNAME}_${xVERSION}-1_amd64.deb"
-    installer="$($XPM get $file_url --no-progress --no-user-agent --name="${xNAME}_v${xVERSION}.deb")"
-    $ySUDO dpkg -i "$installer"
+    local file_url="https://dl.strem.io/shell-linux/v$xVERSION/${xNAME}_${xVERSION}-1_amd64.deb"
+    $ySUDO dpkg -i "$($XPM get $file_url --no-progress)"
 
     $1 install -f # stands for apt/apt-get --fix-broken install
 }
@@ -59,15 +54,15 @@ install_dnf() {
 
 # update commands will be called before install_pack and remove_pack
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
-	# $isSnap, $isFlatpack, $isAppimage are available as boolean
-	# shellcheck disable=SC2154
-	if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
-		# $1 install $xNAME                   # with --assumeyes
-		return 1
-	elif [[ $isAppimage == true ]]; then
-		# $1 install $xNAME
-		return 1
-	else
-		$1 install $xNAME
-	fi
+    # $isSnap, $isFlatpack, $isAppimage are available as boolean
+    # shellcheck disable=SC2154
+    if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
+        # $1 install $xNAME                   # with --assumeyes
+        return 1
+    elif [[ $isAppimage == true ]]; then
+        # $1 install $xNAME
+        return 1
+    else
+        $1 install $xNAME
+    fi
 }
