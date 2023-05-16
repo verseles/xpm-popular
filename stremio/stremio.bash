@@ -17,7 +17,7 @@ validate() {
 }
 
 install_apt() {
-    $1 install --only-upgrade nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
+    $1 install nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
 
     local fdk_aac_url="http://archive.ubuntu.com/ubuntu/pool/multiverse/f/fdk-aac/libfdk-aac1_0.1.6-1_amd64.deb"
     $ySUDO dpkg -i "$($XPM get $fdk_aac_url --no-progress)"
