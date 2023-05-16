@@ -13,7 +13,7 @@ readonly xPROVIDES=("stremio")
 readonly xDEFAULT=()
 
 validate() {
-    $1 --version
+ which "$xNAME" >/dev/null 2>&1 || exit 1
 }
 
 install_apt() {
