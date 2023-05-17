@@ -13,7 +13,8 @@ readonly xPROVIDES=("stremio")
 readonly xDEFAULT=()
 
 validate() {
- which "$xNAME" >/dev/null 2>&1 || exit 1
+    echo "hahaha $1"
+ which "$1" >/dev/null 2>&1 || exit 1
 }
 
 install_apt() {
