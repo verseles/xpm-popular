@@ -7,7 +7,7 @@ readonly xVERSION="0.30.0"
 readonly xTITLE="xpm"
 readonly xDESC="Universal package manager for any unix-like distro, including macOS and Android"
 readonly xURL="https://xpm.link"
-readonly xARCH=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
+readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="https://raw.githubusercontent.com/verseles/$xNAME/v$xVERSION/LICENSE"
 readonly xPROVIDES=('xpm')
 # The list of functions that use the default name (xNAME) on the package manager (for batch install)
@@ -17,13 +17,13 @@ readonly xREQUIRES=('git')
 readonly xCONFLICTS=()
 
 # variables which is dinamically set and available for use
-# $yCHANNEL
+# $xCHANNEL
 #  the default channel is empty, which means the latest stable version
 #  user can change using -c or --channel flag
-# $isSnap, $isFlatpack, $isAppimage
+# $hasSnap, $isFlatpack, $hasAppImage
 #  these boolean variables are set to true if the package manager is available and selected
 # $XPM is the path to xpm executable
-# $ySUDO is the sudo command, if available. Most commands already add sudo if available
+# $xSUDO is the sudo command, if available. Most commands already add sudo if available
 
 # the only required function is validate. install_any and remove_any are very important, but not required.
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME

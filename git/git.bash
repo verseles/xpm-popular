@@ -7,7 +7,7 @@ readonly xVERSION="2.40.1"
 readonly xTITLE="Git"
 readonly xDESC="A distributed version control system"
 readonly xURL="https://git-scm.com"
-readonly xARCH=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
+readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="https://raw.githubusercontent.com/git/git/v$xVERSION/COPYING"
 readonly xPROVIDES=("git")
 # The list of functions that use the default name (xNAME) on the package manager (for batch install)
@@ -25,13 +25,13 @@ install_any() {
 	cd git-* || exit
 	git_install_dir=$(pwd)
 	make configure
-	./configure --prefix="${yBIN/%\/bin/}"
+	./configure --prefix="${xBIN/%\/bin/}"
 	make
-	$ySUDO make install
+	$xSUDO make install
 	cd .. || exit
 	$XPM file delete -rf "$git" "$git_install_dir"
 }
 
 remove_any() {
-	$XPM file unbin "$yBIN/$xNAME" --sudo --force
+	$XPM file unbin "$xBIN/$xNAME" --sudo --force
 }

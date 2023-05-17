@@ -7,7 +7,7 @@ readonly xVERSION="2.0.11"
 readonly xTITLE="Micro Text Editor"
 readonly xDESC="A modern and intuitive terminal-based text editor"
 readonly xURL="https://micro-editor.github.io"
-readonly xARCH=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
+readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="https://raw.githubusercontent.com/zyedidia/micro/v$xVERSION/LICENSE"
 readonly xPROVIDES=("micro")
 
@@ -17,14 +17,14 @@ readonly xPROVIDES=("micro")
 readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'termux')
 
 # variables which is dinamically set and available for use
-# $yCHANNEL
+# $xCHANNEL
 #  the default channel is empty, which means the latest stable version
 #  user can change using -c or --channel flag
-# $isSnap, $isFlatpack, $isAppimage
+# $hasSnap, $isFlatpack, $hasAppImage
 #  these boolean variables are set to true if the package manager is available and selected
 # $XPM is the path to xpm executable
-# $ySUDO is the sudo command, if available. Most commands already add sudo if available
-# $yBIN is the path to first bin folder on PATH.
+# $xSUDO is the sudo command, if available. Most commands already add sudo if available
+# $xBIN is the path to first bin folder on PATH.
 
 # the only required function is validate. install_any and remove_any are very important, but not required.
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
@@ -70,12 +70,12 @@ remove_dnf() {       # $1 means dnf compatible with -y, with sudo if available
 
 # update commands will be called before install_pack and remove_pack
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
-	# $isSnap, $isFlatpack, $isAppimage are available as boolean
+	# $hasSnap, $isFlatpack, $hasAppImage are available as boolean
 	# shellcheck disable=SC2154
 	if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
 		# $1 install $xNAME                   # with --assumeyes
 		return 1
-	elif [[ $isAppimage == true ]]; then # actually micro is not available on appimage
+	elif [[ $hasAppImage == true ]]; then # actually micro is not available on appimage
 		# $1 install $xNAME
 		return 1
 	else # snap
@@ -84,12 +84,12 @@ install_pack() { # $1 means an executable compatible with snap, flatpack or appi
 }
 
 remove_pack() {
-	# $isSnap, $isFlatpack, $isAppimage are available as boolean
+	# $hasSnap, $isFlatpack, $hasAppImage are available as boolean
 	# shellcheck disable=SC2154
 	if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
 		# $1 uninstall $xNAME                 # with --assumeyes
 		exit 1
-	elif [[ $isAppimage == true ]]; then # actually micro is not available on appimage
+	elif [[ $hasAppImage == true ]]; then # actually micro is not available on appimage
 		# rm -f ~/.local/share/appimagekit/$xNAME
 		exit 1
 	else

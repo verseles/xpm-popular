@@ -7,7 +7,7 @@ readonly xVERSION="1.60.0"
 readonly xTITLE="rclone"
 readonly xDESC="Sync files to and from Google Drive, S3, Swift, Cloudfiles, Dropbox and Google Cloud Storage"
 readonly xURL="https://rclone.org"
-readonly xARCH=('x86_64' 'armv6h' 'armv7h' 'aarch64')
+readonly xARCHS=('x86_64' 'armv6h' 'armv7h' 'aarch64')
 readonly xLICENSE="https://raw.githubusercontent.com/$xNAME/$xNAME/master/COPYING"
 readonly xPROVIDES=("rclone")
 
