@@ -90,8 +90,17 @@ remove_swupd() {
 }
 
 install_zypper() {
-    $xSUDO $1 install git nodejs wget libqt5-qtbase-devel libqt5-qtwebengine-devel libqt5-qtquickcontrols libqt5-qtquickcontrols2-devel libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils
-    git nodejs8 libQt5WebChannel5-imports libQt5WebEngine libQt5QuickControls2-5 libqt5-qtquickcontrols libqt5-qtquickcontrols2
+    $xSUDO $1 install git nodejs18 libQt5WebChannel5-imports libQt5WebEngine libQt5QuickControls2-5 libqt5-qtquickcontrols libqt5-qtquickcontrols2
+
+    cd "$xTMP"
+    # git clone only if directory doesn't exist
+    [[ ! -d stremio-shell ]] && git clone --recurse-submodules -j8 https://github.com/Stremio/stremio-shell.git
+    cd stremio-shell
+    sed -i 's/qmake/qmake-qt5/g' release.makefile
+    qmake-qt5
+    make -f release.makefile
+    $xSUDO make -f release.makefile install
+    $xSUDO ./dist-utils/common/postinstall
 }
 
 # update commands will be called before install_pack and remove_pack
