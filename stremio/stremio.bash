@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034 disable=SC2154 disable=SC2164 disable=SC2103
 
-
-
 readonly xNAME="stremio"
 readonly xVERSION="4.4.159"
 readonly xTITLE="Stremio"
@@ -60,16 +58,14 @@ install_dnf() {
     $xSUDO $1 install git nodejs wget librsvg2-devel librsvg2-tools mpv-libs-devel qt5-qtbase-devel qt5-qtwebengine-devel qt5-qtquickcontrols qt5-qtquickcontrols2 openssl-devel gcc g++ make glibc-devel kernel-headers binutils
 
     cd "$xTMP"
-    git clone --recurse-submodules https://github.com/Stremio/stremio-shell.git
+    # git clone only if directory doesn't exist
+    [[ ! -d stremio-shell ]] && git clone --recurse-submodules https://github.com/Stremio/stremio-shell.git
     cd stremio-shell
     sed -i 's/qmake/qmake-qt5/g' release.makefile
     qmake-qt5
     make -f release.makefile
     $xSUDO make -f release.makefile install
     $xSUDO ./dist-utils/common/postinstall
-
-    cd
-    rm -rf "$xTMP" >/dev/null 2>&1 # removes specific temp directory for stremio
 }
 
 remove_dnf() {
