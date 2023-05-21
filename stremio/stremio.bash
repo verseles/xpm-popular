@@ -14,8 +14,8 @@ readonly xPROVIDES=("stremio")
 readonly xDEFAULT=()
 
 validate() {
+    echo "hasSnap: $hasSnap hasFlatpak: $hasFlatpak hasAppImage: $hasAppImage 1: $1 flatpak: $(flatpak list | grep -q 'stremio') flatpak2 $(flatpak list | grep 'stremio')"
     if [[ $hasFlatpak == true && $(flatpak list | grep -q 'stremio') ]]; then
-        echo "Stremio is already installed via Flatpak"
         exit 0
     fi
     if [[ ! -x "$(command -v "$1")" ]]; then
@@ -116,7 +116,6 @@ remove_zypper() {
 
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
     # $hasSnap, $hasFlatpak, $hasAppImage are available as boolean
-    echo "hasSnap: $hasSnap hasFlatpak: $hasFlatpak hasAppImage: $hasAppImage 1: $1"
     if [[ $hasFlatpak == true ]]; then
         $xSUDO $1 install flathub com.stremio.Stremio
     elif [[ $hasAppImage == true ]]; then
