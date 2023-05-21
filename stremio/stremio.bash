@@ -91,7 +91,7 @@ remove_swupd() {
 }
 
 install_zypper() {
-    $xSUDO $1 install git nodejs20 wget libqt5-qtbase-devel libqt5-qtwebengine-devel libqt5-qtquickcontrols \
+    $xSUDO $1 install git nodejs20 mpv wget libqt5-qtbase-devel libqt5-qtwebengine-devel libqt5-qtquickcontrols \
     libqt5-qtquickcontrols2-devel libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils \
     || echo "zypper says some packages are already installed. Proceeding..."
 
