@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034 disable=SC2154 disable=SC2164 disable=SC2103
+# thanks to https://github.com/alexandru-balan/Stremio-Install-Scripts
 
 readonly xNAME="stremio"
 readonly xVERSION="4.4.159"
@@ -90,7 +91,7 @@ remove_swupd() {
 }
 
 install_zypper() {
-    $xSUDO $1 install git nodejs18 libQt5WebChannel5-imports libQt5WebEngine libQt5QuickControls2-5 libqt5-qtquickcontrols libqt5-qtquickcontrols2
+    $xSUDO $1 install git nodejs wget libqt5-qtbase-devel libqt5-qtwebengine-devel libqt5-qtquickcontrols libqt5-qtquickcontrols2-devel libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils
 
     cd "$xTMP"
     # git clone only if directory doesn't exist
@@ -101,6 +102,10 @@ install_zypper() {
     make -f release.makefile
     $xSUDO make -f release.makefile install
     $xSUDO ./dist-utils/common/postinstall
+}
+
+remove_zypper() {
+    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
 }
 
 # update commands will be called before install_pack and remove_pack
