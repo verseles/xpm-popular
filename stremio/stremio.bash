@@ -14,6 +14,10 @@ readonly xPROVIDES=("stremio")
 readonly xDEFAULT=()
 
 validate() {
+    if [[ $hasFlatpak == true && $(flatpak list | grep -q 'stremio') ]]; then
+        echo "Stremio is already installed via Flatpak"
+        exit 0
+    fi
     if [[ ! -x "$(command -v "$1")" ]]; then
         exit 1
     fi
@@ -70,7 +74,7 @@ install_dnf() {
 }
 
 remove_dnf() {
-    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
 }
 
 install_swupd() {
@@ -87,7 +91,7 @@ install_swupd() {
 }
 
 remove_swupd() {
-    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
 }
 
 install_zypper() {
@@ -107,7 +111,7 @@ install_zypper() {
 }
 
 remove_zypper() {
-    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
 }
 
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
