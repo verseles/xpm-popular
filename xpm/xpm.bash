@@ -20,7 +20,7 @@ readonly xCONFLICTS=()
 # $xCHANNEL
 #  the default channel is empty, which means the latest stable version
 #  user can change using -c or --channel flag
-# $hasSnap, $isFlatpack, $hasAppImage
+# $hasSnap, $hasFlatpak, $hasAppImage
 #  these boolean variables are set to true if the package manager is available and selected
 # $XPM is the path to xpm executable
 # $xSUDO is the sudo command, if available. Most commands already add sudo if available

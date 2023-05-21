@@ -91,7 +91,7 @@ remove_swupd() {
 }
 
 install_zypper() {
-    $xSUDO $1 install git nodejs20 mpv-devel wget libqt5-qtbase-devel libqt5-qtwebengine-devel \
+    $xSUDO $1 install git nodejs20 mpv-devel rsvg-convert wget libqt5-qtbase-devel libqt5-qtwebengine-devel \
         libqt5-qtquickcontrols libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils ||
         echo "zypper says some packages are already installed. Proceeding..."
 
@@ -110,12 +110,10 @@ remove_zypper() {
     $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
 }
 
-# update commands will be called before install_pack and remove_pack
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
-    # $hasSnap, $isFlatpack, $hasAppImage are available as boolean
-    if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
-        # $1 install $xNAME                   # with --assumeyes
-        return 1
+    # $hasSnap, $hasFlatpak, $hasAppImage are available as boolean
+    if [[ $hasFlatpak == true ]]; then
+        $1 install flathub com.stremio.Stremio
     elif [[ $hasAppImage == true ]]; then
         # $1 install $xNAME
         return 1

@@ -20,7 +20,7 @@ readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'termux')
 # $xCHANNEL
 #  the default channel is empty, which means the latest stable version
 #  user can change using -c or --channel flag
-# $hasSnap, $isFlatpack, $hasAppImage
+# $hasSnap, $hasFlatpak, $hasAppImage
 #  these boolean variables are set to true if the package manager is available and selected
 # $XPM is the path to xpm executable
 # $xSUDO is the sudo command, if available. Most commands already add sudo if available
@@ -70,9 +70,9 @@ remove_dnf() {       # $1 means dnf compatible with -y, with sudo if available
 
 # update commands will be called before install_pack and remove_pack
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
-	# $hasSnap, $isFlatpack, $hasAppImage are available as boolean
+	# $hasSnap, $hasFlatpak, $hasAppImage are available as boolean
 	# shellcheck disable=SC2154
-	if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
+	if [[ $hasFlatpak == true ]]; then # actually micro is not available on flatpack
 		# $1 install $xNAME                   # with --assumeyes
 		return 1
 	elif [[ $hasAppImage == true ]]; then # actually micro is not available on appimage
@@ -84,9 +84,9 @@ install_pack() { # $1 means an executable compatible with snap, flatpack or appi
 }
 
 remove_pack() {
-	# $hasSnap, $isFlatpack, $hasAppImage are available as boolean
+	# $hasSnap, $hasFlatpak, $hasAppImage are available as boolean
 	# shellcheck disable=SC2154
-	if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
+	if [[ $hasFlatpak == true ]]; then # actually micro is not available on flatpack
 		# $1 uninstall $xNAME                 # with --assumeyes
 		exit 1
 	elif [[ $hasAppImage == true ]]; then # actually micro is not available on appimage
