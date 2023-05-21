@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034 disable=SC2154 disable=SC2164 disable=SC2103
+
+
 
 readonly xNAME="stremio"
 readonly xVERSION="4.4.159"
@@ -55,9 +57,9 @@ remove_pacman() {
 }
 
 install_dnf() {
-    $xSUDO "$1" install nodejs wget librsvg2-devel librsvg2-tools mpv-libs-devel qt5-qtbase-devel qt5-qtwebengine-devel qt5-qtquickcontrols qt5-qtquickcontrols2 openssl-devel gcc g++ make glibc-devel kernel-headers binutils
+    $xSUDO $1 install nodejs wget librsvg2-devel librsvg2-tools mpv-libs-devel qt5-qtbase-devel qt5-qtwebengine-devel qt5-qtquickcontrols qt5-qtquickcontrols2 openssl-devel gcc g++ make glibc-devel kernel-headers binutils
 
-    cd $xTMP
+    cd "$xTMP"
     git clone --recurse-submodules https://github.com/Stremio/stremio-shell.git
     cd stremio-shell
     sed -i 's/qmake/qmake-qt5/g' release.makefile
@@ -73,7 +75,6 @@ install_dnf() {
 # update commands will be called before install_pack and remove_pack
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
     # $hasSnap, $isFlatpack, $hasAppImage are available as boolean
-    # shellcheck disable=SC2154
     if [[ $isFlatpack == true ]]; then # actually micro is not available on flatpack
         # $1 install $xNAME                   # with --assumeyes
         return 1
