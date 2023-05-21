@@ -68,8 +68,8 @@ install_dnf() {
     $xSUDO make -f release.makefile install
     $xSUDO ./dist-utils/common/postinstall
 
-    cd ..
-    rm -rf stremio-shell
+    cd
+    rm -rf "$xTMP" >/dev/null 2>&1 # removes specific temp directory for stremio
 }
 
 remove_dnf() {
