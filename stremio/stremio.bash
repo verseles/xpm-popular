@@ -21,6 +21,20 @@ validate() {
     fi
 }
 
+install_any() {
+    cd "$xTMP"
+    # git clone only if directory doesn't exist
+    [[ ! -d stremio-shell ]] && git clone --recurse-submodules -j8 https://github.com/Stremio/stremio-shell.git
+    cd stremio-shell
+    make -f release.makefile
+    $xSUDO make -f release.makefile install
+    $xSUDO ./dist-utils/common/postinstall
+}
+
+remove_any() {
+    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+}
+
 install_apt() {
     # @TODO support beta version
     $xSUDO $1 install nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
@@ -60,33 +74,21 @@ remove_pacman() {
 install_dnf() {
     $xSUDO $1 install git nodejs wget librsvg2-devel librsvg2-tools mpv-libs-devel qt5-qtbase-devel qt5-qtwebengine-devel qt5-qtquickcontrols qt5-qtquickcontrols2 openssl-devel gcc g++ make glibc-devel kernel-headers binutils
 
-    cd "$xTMP"
-    # git clone only if directory doesn't exist
-    [[ ! -d stremio-shell ]] && git clone --recurse-submodules -j8 https://github.com/Stremio/stremio-shell.git
-    cd stremio-shell
-    make -f release.makefile
-    $xSUDO make -f release.makefile install
-    $xSUDO ./dist-utils/common/postinstall
+    install_any "$@"
 }
 
 remove_dnf() {
-    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+    remove_any "$@"
 }
 
 install_swupd() {
     $xSUDO $1 bundle-add -y git nodejs-basic wget mpv qt-basic-dev devpkg-qtwebengine lib-qt5webengine c-basic
 
-    cd "$xTMP"
-    # git clone only if directory doesn't exist
-    [[ ! -d stremio-shell ]] && git clone --recurse-submodules -j8 https://github.com/Stremio/stremio-shell.git
-    cd stremio-shell
-    make -f release.makefile
-    $xSUDO make -f release.makefile install
-    $xSUDO ./dist-utils/common/postinstall
+    install_any "$@"
 }
 
 remove_swupd() {
-    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+    remove_any "$@"
 }
 
 install_zypper() {
@@ -94,17 +96,11 @@ install_zypper() {
         libqt5-qtquickcontrols libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils ||
         echo "zypper says some packages are already installed. Proceeding..."
 
-    cd "$xTMP"
-    # git clone only if directory doesn't exist
-    [[ ! -d stremio-shell ]] && git clone --recurse-submodules -j8 https://github.com/Stremio/stremio-shell.git
-    cd stremio-shell
-    make -f release.makefile
-    $xSUDO make -f release.makefile install
-    $xSUDO ./dist-utils/common/postinstall
+    install_any "$@"
 }
 
 remove_zypper() {
-    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+    remove_any "$@"
 }
 
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
