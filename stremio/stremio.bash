@@ -92,10 +92,9 @@ install_pack() { # $1 means an executable compatible with snap, flatpack or appi
     if [[ $hasFlatpak == true ]]; then
         $xSUDO $1 install flathub com.stremio.Stremio
     elif [[ $hasAppImage == true ]]; then
-        # $1 install $xNAME
         return 1
     else
-        $1 install $xNAME
+        return 1
     fi
 }
 
@@ -103,10 +102,9 @@ remove_pack() {
     if [[ $hasFlatpak == true ]]; then
         $xSUDO $1 uninstall com.stremio.Stremio
     elif [[ $hasAppImage == true ]]; then
-        # $1 remove $xNAME
         return 1
     else
-        $1 remove $xNAME
+        return 1
     fi
 }
 
