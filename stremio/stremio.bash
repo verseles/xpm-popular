@@ -13,8 +13,7 @@ readonly xLICENSE="GPL-3.0"
 readonly xDEFAULT=()
 
 validate() {
-    echo "hasSnap: $hasSnap hasFlatpak: $hasFlatpak hasAppImage: $hasAppImage 1: $1 flatpak: $(flatpak list | grep -q 'stremio') flatpak2 $(flatpak list | grep 'stremio')"
-    if [[ $hasFlatpak == true && $(flatpak list | grep -q 'stremio') ]]; then
+    if [[ $hasFlatpak == true && $(flatpak list | grep $xNAME) ]]; then
         exit 0
     fi
     if [[ ! -x "$(command -v "$1")" ]]; then
