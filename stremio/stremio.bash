@@ -48,19 +48,11 @@ remove_apt() {
 }
 
 install_pacman() {
-    if [[ -n $xCHANNEL ]]; then
-        $1 -S --needed "$xNAME-$xCHANNEL"
-    else
-        $1 -S --needed $xNAME
-    fi
+    $1 -S "$xNAME-beta"
 }
 
 remove_pacman() {
-    if [[ -n $xCHANNEL ]]; then
-        $1 -R "$xNAME-$xCHANNEL"
-    else
-        $1 -R $xNAME
-    fi
+    $1 -R "$xNAME-beta"
 }
 
 install_dnf() {
