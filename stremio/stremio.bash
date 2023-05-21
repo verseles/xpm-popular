@@ -113,7 +113,7 @@ remove_zypper() {
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
     # $hasSnap, $hasFlatpak, $hasAppImage are available as boolean
     if [[ $hasFlatpak == true ]]; then
-        $1 install flathub com.stremio.Stremio
+        echo $1 install flathub com.stremio.Stremio
     elif [[ $hasAppImage == true ]]; then
         # $1 install $xNAME
         return 1
