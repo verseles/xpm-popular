@@ -109,3 +109,11 @@ remove_pack() {
         $1 remove $xNAME
     fi
 }
+
+install_brew() {
+    $1 install stremio
+}
+
+remove_brew() {
+    $1 uninstall stremio
+}
