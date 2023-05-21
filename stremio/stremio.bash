@@ -13,13 +13,14 @@ readonly xPROVIDES=("stremio")
 readonly xDEFAULT=()
 
 validate() {
-    echo "hahaha $1"
- which "$1" >/dev/null 2>&1 || exit 1
+    if [[ ! -x "$(command -v "$1")" ]]; then
+        exit 1
+    fi
 }
 
 install_apt() {
     # @TODO support beta version
-    $1 install nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
+    $xSUDO $1 install nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
 
     local fdk_aac_url="http://archive.ubuntu.com/ubuntu/pool/multiverse/f/fdk-aac/libfdk-aac1_0.1.6-1_amd64.deb"
     $xSUDO dpkg -i "$($XPM get $fdk_aac_url --no-progress)"
@@ -54,7 +55,19 @@ remove_pacman() {
 }
 
 install_dnf() {
-    $xSUDO $1 install -y $xNAME
+    $xSUDO "$1" install nodejs wget librsvg2-devel librsvg2-tools mpv-libs-devel qt5-qtbase-devel qt5-qtwebengine-devel qt5-qtquickcontrols qt5-qtquickcontrols2 openssl-devel gcc g++ make glibc-devel kernel-headers binutils
+
+    cd $xTMP
+    git clone --recurse-submodules https://github.com/Stremio/stremio-shell.git
+    cd stremio-shell
+    sed -i 's/qmake/qmake-qt5/g' release.makefile
+    qmake-qt5
+    make -f release.makefile
+    $xSUDO make -f release.makefile install
+    $xSUDO ./dist-utils/common/postinstall
+
+    cd ..
+    rm -rf stremio-shell
 }
 
 # update commands will be called before install_pack and remove_pack
