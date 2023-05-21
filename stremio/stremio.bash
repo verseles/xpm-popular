@@ -100,8 +100,6 @@ install_zypper() {
     # git clone only if directory doesn't exist
     [[ ! -d stremio-shell ]] && git clone --recurse-submodules -j8 https://github.com/Stremio/stremio-shell.git
     cd stremio-shell
-    sed -i 's/qmake/qmake-qt5/g' release.makefile
-    qmake-qt5
     make -f release.makefile
     $xSUDO make -f release.makefile install
     $xSUDO ./dist-utils/common/postinstall
