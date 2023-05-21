@@ -38,22 +38,13 @@ remove_any() {
 
 install_apt() {
     # @TODO support beta version
-    $xSUDO $1 install nodejs libmpv1 qml-module-qt-labs-platform qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtwebchannel qml-module-qtwebengine qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings librubberband2 libuchardet0
+    $xSUDO $1 install qtcreator qt5-qmake g++ pkgconf libssl-dev libmpv-dev libqt5webview5-dev libkf5webengineviewer-dev qml-module-qtwebchannel qml-module-qt-labs-platform qml-module-qtwebengine qml-module-qtquick-dialogs qml-module-qtquick-controls qtdeclarative5-dev qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel
 
-    local fdk_aac_url="http://archive.ubuntu.com/ubuntu/pool/multiverse/f/fdk-aac/libfdk-aac1_0.1.6-1_amd64.deb"
-    $xSUDO dpkg -i "$($XPM get $fdk_aac_url --no-progress)"
-
-    local libssl_url="http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.22_amd64.deb"
-    $xSUDO dpkg -i "$($XPM get $libssl_url --no-progress)"
-
-    local file_url="https://dl.strem.io/shell-linux/v$xVERSION/${xNAME}_${xVERSION}-1_amd64.deb"
-    $xSUDO dpkg -i "$($XPM get $file_url --no-progress)"
-
-    $1 install -f # stands for apt/apt-get --fix-broken install
+    install_any "$@"
 }
 
 remove_apt() {
-    $xSUDO dpkg -r "$xNAME"
+    remove_any "$@"
 }
 
 install_pacman() {
