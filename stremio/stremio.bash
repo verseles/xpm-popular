@@ -16,9 +16,14 @@ validate() {
     if [[ $hasFlatpak == true && $(flatpak list | grep $xNAME) ]]; then
         exit 0
     fi
-    if [[ ! -x "$(command -v "$1")" ]]; then
-        exit 1
+    if [[ -d "/Applications/Stremio.app" ]]; then
+        exit 0
     fi
+    if [[ -x "$(command -v "$1")" ]]; then
+        exit 0
+    fi
+
+    exit 1
 }
 
 install_any() {
