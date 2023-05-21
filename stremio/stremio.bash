@@ -43,7 +43,7 @@ remove_any() {
 
 install_apt() {
     # @TODO support beta version
-    $xSUDO $1 install git cmake librsvg2-bin qtcreator qt5-qmake g++ pkgconf libssl-dev libmpv-dev libqt5webview5-dev libkf5webengineviewer-dev qml-module-qtwebchannel qml-module-qt-labs-platform qml-module-qtwebengine qml-module-qtquick-dialogs qml-module-qtquick-controls qtdeclarative5-dev qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel
+    $xSUDO $1 install git wget cmake librsvg2-bin qtcreator qt5-qmake g++ pkgconf libssl-dev libmpv-dev libqt5webview5-dev libkf5webengineviewer-dev qml-module-qtwebchannel qml-module-qt-labs-platform qml-module-qtwebengine qml-module-qtquick-dialogs qml-module-qtquick-controls qtdeclarative5-dev qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel
 
     install_any "$@"
 }
@@ -82,7 +82,7 @@ remove_swupd() {
 
 install_zypper() {
     $xSUDO $1 install git nodejs20 mpv-devel rsvg-convert wget libqt5-qtbase-devel libqt5-qtwebengine-devel \
-        libqt5-qtquickcontrols libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils ||
+        wget libqt5-qtquickcontrols libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils ||
         echo "zypper says some packages are already installed. Proceeding..."
 
     install_any "$@"
