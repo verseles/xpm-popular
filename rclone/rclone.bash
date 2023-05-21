@@ -39,7 +39,7 @@ remove_dnf() {
 	$1 remove -y $xNAME
 }
 
-install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
+install_pack() { # $1 means an executable compatible with snap, flatpack
 	$1 install $xNAME
 }
 

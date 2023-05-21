@@ -10,7 +10,7 @@ readonly xURL="https://www.stremio.com/"
 readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos-x86_64' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="GPL-3.0"
 
-readonly xDEFAULT=()
+readonly xDEFAULT=('brew')
 
 validate() {
     if [[ $hasFlatpak == true && $(flatpak list | grep $xNAME) ]]; then
@@ -87,31 +87,15 @@ remove_zypper() {
     remove_any "$@"
 }
 
-install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
-    # $hasSnap, $hasFlatpak, $hasAppImage are available as boolean
+install_pack() { # $1 means an executable compatible with snap or flatpack
+    # $hasSnap or $hasFlatpak are available as boolean
     if [[ $hasFlatpak == true ]]; then
         $xSUDO $1 install flathub com.stremio.Stremio
-    elif [[ $hasAppImage == true ]]; then
-        return 1
-    else
-        return 1
     fi
 }
 
 remove_pack() {
     if [[ $hasFlatpak == true ]]; then
         $xSUDO $1 uninstall com.stremio.Stremio
-    elif [[ $hasAppImage == true ]]; then
-        return 1
-    else
-        return 1
     fi
-}
-
-install_brew() {
-    $1 install stremio
-}
-
-remove_brew() {
-    $1 uninstall stremio
 }
