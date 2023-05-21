@@ -9,7 +9,6 @@ readonly xDESC="A modern media center that's a one-stop solution for your video 
 readonly xURL="https://www.stremio.com/"
 readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="GPL-3.0"
-readonly xPROVIDES=("stremio")
 
 readonly xDEFAULT=()
 
@@ -123,5 +122,16 @@ install_pack() { # $1 means an executable compatible with snap, flatpack or appi
         return 1
     else
         $1 install $xNAME
+    fi
+}
+
+remove_pack() {
+    if [[ $hasFlatpak == true ]]; then
+        $xSUDO $1 uninstall com.stremio.Stremio
+    elif [[ $hasAppImage == true ]]; then
+        # $1 remove $xNAME
+        return 1
+    else
+        $1 remove $xNAME
     fi
 }
