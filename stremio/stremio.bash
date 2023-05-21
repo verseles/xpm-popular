@@ -7,7 +7,7 @@ readonly xVERSION="4.4.159"
 readonly xTITLE="Stremio"
 readonly xDESC="A modern media center that's a one-stop solution for your video entertainment"
 readonly xURL="https://www.stremio.com/"
-readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos-x86_64' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
+readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="GPL-3.0"
 
 readonly xDEFAULT=('brew')
