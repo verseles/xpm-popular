@@ -72,6 +72,10 @@ install_dnf() {
     rm -rf stremio-shell
 }
 
+remove_dnf() {
+    $xSUDO rm -rf /usr/local/share/applications/smartcode-stremio.desktop /usr/bin/stremio /opt/stremio
+}
+
 # update commands will be called before install_pack and remove_pack
 install_pack() { # $1 means an executable compatible with snap, flatpack or appimage
     # $hasSnap, $isFlatpack, $hasAppImage are available as boolean
