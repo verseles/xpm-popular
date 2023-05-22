@@ -12,7 +12,14 @@ readonly xLICENSE="GPL-2.0-only"
 readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'zypper')
 
 validate() {
-    $1 --version
+    if [[ $hasFlatpak == true && $(flatpak list | grep $xNAME) ]]; then
+        exit 0
+    fi
+    if [[ -x "$(command -v "$1")" ]]; then
+        exit 0
+    fi
+
+    exit 1
 }
 
 install_pack() {
