@@ -10,7 +10,7 @@ readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'ma
 readonly xLICENSE="MPL GPL LGPL"
 readonly xPROVIDES=("firefox")
 
-readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'termux')
+readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew')
 
 validate() {
     $1 --version
