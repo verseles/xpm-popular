@@ -35,7 +35,7 @@ remove_flatpak() {
 install_appimage() {
     local binary="https://github.com/ivan-hc/VLC-appimage/releases/download/continuous/VLC_media_player-3.0.19-20230521-with-plugins-x86_64.AppImage"
     local sha256="b892ddab8120ad117073ca4c89b5b079abd09f6d8eabdcf49578df25d4e2b762"
-    $XPM get --no-progress --no-user-agent --name="$xNAME" --exec --bin --sha256="$sha256"
+    $XPM get $binary --no-progress --no-user-agent --name="$xNAME" --exec --bin --sha256="$sha256"
     $XPM shortcut --name="$xNAME" --path="$xBIN/$xNAME" --description="$xDESC" --category="Multimedia"
 }
 
