@@ -27,8 +27,15 @@ readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'termux')
 # $xBIN is the path to first bin folder on PATH.
 
 # the only required function is validate. install_any and remove_any are very important, but not required.
-validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
-	$1 --version
+validate() {
+    if [[ $hasFlatpak == true && $(flatpak list | grep $xNAME) ]]; then
+        exit 0
+    fi
+    if [[ -x "$(command -v "$1")" ]]; then
+        exit 0
+    fi
+
+    exit 1
 }
 
 install_any() {
@@ -52,11 +59,11 @@ remove_apt() {    # $1 means apt compatible, with sudo if available
 
 # pacman -Syu will be called before install_pacman and remove_pacman
 install_pacman() { # $1 means an executable compatible with pacman (Arch Linux)
-	$1 -S $xNAME      # with --noconfirm, with sudo if available
+	$1 -S $xNAME      # with --noconfirm, with sudo if available only for pacman
 }
 
 remove_pacman() { # $1 means pacman compatible
-	$1 -R $xNAME     # with --noconfirm, with sudo if available
+	$1 -R $xNAME     # with --noconfirm, with sudo if available only for pacman
 }
 
 # dnf update will be called before install_dnf and remove_dnf
@@ -68,21 +75,20 @@ remove_dnf() {       # $1 means dnf compatible with -y, with sudo if available
 	$1 remove -y $xNAME # with -y, with sudo if available
 }
 
-# update commands will be called before install_pack and remove_pack
-install_pack() { # $1 means an executable compatible with snap, flatpack
-	# $hasSnap, $isFlatpack are available as boolean
-	# shellcheck disable=SC2154
-	if [[ $hasSnap == true ]]; then
-		$1 install $xNAME --classic
-	fi
+install_snap() { # $1 means an executable compatible with snap
+	$1 install $xNAME --classic
 }
 
-remove_pack() {
-	# $hasSnap, $isFlatpack are available as boolean
-	# shellcheck disable=SC2154
-	if [[ $hasSnap == true ]]; then
-		$1 remove $xNAME
-	fi
+remove_snap() { # $1 means snap compatible
+	$1 remove $xNAME
+}
+
+install_flatpak() { # $1 means an executable compatible with flatpak
+	$xSUDO $1 install flathub io.github.zyedidia.micro
+}
+
+remove_flatpak() { # $1 means flatpak compatible
+	$xSUDO $1 remove io.github.zyedidia.micro
 }
 
 # choco update will be called before install_choco and remove_choco

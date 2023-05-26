@@ -43,7 +43,8 @@ remove_any() {
 
 install_apt() {
     # @TODO support beta version
-    $xSUDO $1 install git wget cmake librsvg2-bin qtcreator qt5-qmake g++ pkgconf libssl-dev libmpv-dev libqt5webview5-dev libkf5webengineviewer-dev qml-module-qtwebchannel qml-module-qt-labs-platform qml-module-qtwebengine qml-module-qtquick-dialogs qml-module-qtquick-controls qtdeclarative5-dev qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel
+    # $1 is apt with sudo if available
+    $1 install git wget cmake librsvg2-bin qtcreator qt5-qmake g++ pkgconf libssl-dev libmpv-dev libqt5webview5-dev libkf5webengineviewer-dev qml-module-qtwebchannel qml-module-qt-labs-platform qml-module-qtwebengine qml-module-qtquick-dialogs qml-module-qtquick-controls qtdeclarative5-dev qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel
 
     install_any "$@"
 }
@@ -53,6 +54,7 @@ remove_apt() {
 }
 
 install_pacman() {
+    # $1 has sudo if $1 is pacman
     $1 -S "$xNAME-beta"
 }
 
@@ -61,7 +63,8 @@ remove_pacman() {
 }
 
 install_dnf() {
-    $xSUDO $1 install git nodejs wget librsvg2-devel librsvg2-tools mpv-libs-devel qt5-qtbase-devel qt5-qtwebengine-devel qt5-qtquickcontrols qt5-qtquickcontrols2 openssl-devel gcc g++ make glibc-devel kernel-headers binutils
+    # $1 is dnf with sudo if available
+    $1 install git nodejs wget librsvg2-devel librsvg2-tools mpv-libs-devel qt5-qtbase-devel qt5-qtwebengine-devel qt5-qtquickcontrols qt5-qtquickcontrols2 openssl-devel gcc g++ make glibc-devel kernel-headers binutils
 
     install_any "$@"
 }
@@ -71,7 +74,8 @@ remove_dnf() {
 }
 
 install_swupd() {
-    $xSUDO $1 bundle-add -y git nodejs-basic wget mpv qt-basic-dev devpkg-qtwebengine lib-qt5webengine c-basic
+    # $1 is swupd with sudo if available
+    $1 bundle-add -y git nodejs-basic wget mpv qt-basic-dev devpkg-qtwebengine lib-qt5webengine c-basic
 
     install_any "$@"
 }
@@ -81,7 +85,8 @@ remove_swupd() {
 }
 
 install_zypper() {
-    $xSUDO $1 install git nodejs20 mpv-devel rsvg-convert wget libqt5-qtbase-devel libqt5-qtwebengine-devel \
+    # $1 is zypper with sudo if available
+    $1 install git nodejs20 mpv-devel rsvg-convert wget libqt5-qtbase-devel libqt5-qtwebengine-devel \
         wget libqt5-qtquickcontrols libopenssl-devel gcc gcc-c++ make glibc-devel kernel-devel binutils ||
         echo "zypper says some packages are already installed. Proceeding..."
 
@@ -92,15 +97,10 @@ remove_zypper() {
     remove_any "$@"
 }
 
-install_pack() { # $1 means an executable compatible with snap or flatpack
-    # $hasSnap or $hasFlatpak are available as boolean
-    if [[ $hasFlatpak == true ]]; then
-        $xSUDO $1 install flathub com.stremio.Stremio
-    fi
+install_flatpak() { # $1 means an executable compatible with flatpack with sudo if available
+    $1 install flathub com.stremio.Stremio
 }
 
-remove_pack() {
-    if [[ $hasFlatpak == true ]]; then
-        $xSUDO $1 uninstall com.stremio.Stremio
-    fi
+remove_flatpak() { # $1 means an executable compatible with flatpack with sudo if available
+    $1 uninstall com.stremio.Stremio 
 }

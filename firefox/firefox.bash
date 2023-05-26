@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034 disable=SC2154 disable=SC2164 disable=SC2103
 
 readonly xNAME="firefox"
 readonly xVERSION="113.0.1"
@@ -10,10 +10,18 @@ readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'ma
 readonly xLICENSE="MPL GPL LGPL"
 readonly xPROVIDES=("firefox")
 
-readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew')
+# by using xDEFAULT, it uses $xNAME as the package name and there is no need to use separate functions for each package manager
+readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'snap')
 
 validate() {
-    $1 --version
+    if [[ $hasFlatpak == true && $(flatpak list | grep $xNAME) ]]; then
+        exit 0
+    fi
+    if [[ -x "$(command -v "$1")" ]]; then
+        exit 0
+    fi
+
+    exit 1
 }
 
 install_any() {
@@ -31,10 +39,18 @@ remove_any() {
     $XPM shortcut --remove --name="$xNAME"
 }
 
-install_zypper() { # $1 means zypper, so: [sudo] zypper install [package]
-    $xSUDO "$1" install mozillaFirefox
+install_zypper() { # $1 means zypper with sudo if available, so: [sudo] zypper --non-interactive install [package]
+    $1 install mozillaFirefox
 }
 
-remove_zypper() { # $1 means zypper -y, so: [sudo] zypper -y remove [package]
-    $xSUDO "$1" remove mozillaFirefox
+remove_zypper() { # $1 means zypper with sudo if available, so: [sudo] zypper --non-interactive remove [package]
+    $1 remove mozillaFirefox
+}
+
+install_flatpak() { # $1 means flatpak with sudo if available
+    $1 install flathub org.mozilla.firefox
+}
+
+remove_flatpak() {
+    $1 remove org.mozilla.firefox
 }
