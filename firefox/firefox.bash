@@ -63,8 +63,8 @@ install_appimage() {
     local binary="https://github.com/srevinsaju/Firefox-Appimage/releases/download/firefox/firefox-113.0.r20230522134052-x86_64.AppImage"srevinsaju
     local sha256="79ac00fdc8920ae279d3f00841b4980ef265065aa4373ad098adde26d2fc5775"
 
-    $xSUDO $XPM get $binary --no-progress --no-user-agent --name="$xNAME" --exec --bin --sha256="$sha256"
-    $xSUDO $XPM shortcut --name="$xNAME" --path="$xBIN/$xNAME" --description="$xDESC" --category="Network"
+    $XPM get $binary --no-progress --no-user-agent --name="$xNAME" --exec --bin --sha256="$sha256"
+    $XPM shortcut --sudo --name="$xNAME" --path="$xBIN/$xNAME %u" --description="$xDESC" --category="Network;WebBrowser;" --mime="text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;"
 }
 
 remove_appimage() {
