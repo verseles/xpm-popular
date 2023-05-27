@@ -54,3 +54,20 @@ install_flatpak() { # $1 means flatpak with sudo if available
 remove_flatpak() {
     $1 remove org.mozilla.firefox
 }
+
+install_appimage() {
+    # https://github.com/srevinsaju/Firefox-Appimage/releases/download/firefox/firefox-113.0.r20230522134052-x86_64.AppImage
+    # Thanks to https://github.com/srevinsaju/Firefox-Appimage/releases
+    # @TODO: add support for channels
+
+    local binary="https://github.com/srevinsaju/Firefox-Appimage/releases/download/firefox/firefox-113.0.r20230522134052-x86_64.AppImage"srevinsaju
+    local sha256="79ac00fdc8920ae279d3f00841b4980ef265065aa4373ad098adde26d2fc5775"
+
+    $xSUDO $XPM get $binary --no-progress --no-user-agent --name="$xNAME" --exec --bin --sha256="$sha256"
+    $xSUDO $XPM shortcut --name="$xNAME" --path="$xBIN/$xNAME" --description="$xDESC" --category="Network"
+}
+
+remove_appimage() {
+    $XPM file unbin $xNAME --sudo --force
+    $XPM shortcut --remove --name="$xNAME" --sudo
+}
