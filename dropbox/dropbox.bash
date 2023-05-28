@@ -48,7 +48,7 @@ install_apt() {
 		ARCH="amd64"
 		BINARY="https://www.dropbox.com/download?dl=packages/ubuntu/${xNAME}_${xVERSION}_$ARCH.deb"
 	else
-		$XPM log error "Architecture $xARCH is not supported, try -m any or -m flatpak"
+		install_any
 		return
 	fi
 	$XPM log info "Downloading $BINARY"
@@ -58,7 +58,12 @@ install_apt() {
 }
 
 remove_apt() {
-	$xSUDO apt-get remove -y "$xNAME"
+	if [[ $xARCH == "x86" || $xARCH == "x86_64" ]]; then
+		$xSUDO apt-get remove "$xNAME"
+	else
+		remove_any
+		return
+	fi
 }
 
 install_dnf() {
@@ -72,7 +77,7 @@ install_dnf() {
 		ARCH="x86_64"
 		BINARY="https://www.dropbox.com/download?dl=packages/fedora/nautilus-dropbox-$xVERSION-1.fedora.$ARCH.rpm"
 	else
-		$XPM log error "Architecture $xARCH is not supported, try -m any or -m flatpak"
+		install_any
 		return
 	fi
 	$XPM log info "Downloading $BINARY"
@@ -83,8 +88,21 @@ install_dnf() {
 	$1 "$file"
 }
 
+remove_dnf() {
+	if [[ $xARCH == "x86" || $xARCH == "x86_64" ]]; then
+		$1 remove "$xNAME"
+	else
+		remove_any
+		return
+	fi
+}
+
 install_flatpak() {
 	$1 install flathub com.dropbox.Client
+
+	RANDOM=$(cat /proc/sys/kernel/random/uuid)
+
+	
 }
 
 remove_flatpak() {
