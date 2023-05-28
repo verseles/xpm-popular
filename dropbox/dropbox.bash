@@ -78,6 +78,8 @@ install_dnf() {
 	$XPM log info "Downloading $BINARY"
 	local file
 	file="$($XPM get "$BINARY" --no-progress --no-user-agent --name="$xNAME-$xVERSION-$ARCH.rpm")"
+	$XPM log info "Installing $file"
+	$XPM log info "Installing $file"
 	$1 "$file"
 }
 
