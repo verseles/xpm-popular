@@ -20,6 +20,8 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 }
 
 install_any() {
+	remove_any
+
 	local OS
 	local VERSION
 	local ARCH
