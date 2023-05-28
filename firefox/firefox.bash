@@ -4,7 +4,7 @@
 readonly xNAME="firefox"
 readonly xVERSION="113.0.1"
 readonly xTITLE="Mozilla Firefox"
-readonly xDESC="A free and open-source web browser developed by the Mozilla Foundation and its subsidiary, the Mozilla Corporation"
+readonly xDESC="A free and open-source web browser developed by the Mozilla Foundation"
 readonly xURL="https://www.mozilla.org/firefox"
 readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
 readonly xLICENSE="MPL GPL LGPL"
