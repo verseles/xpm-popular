@@ -84,11 +84,11 @@ remove_snap() { # $1 means snap compatible
 }
 
 install_flatpak() { # $1 means an executable compatible with flatpak
-	$xSUDO $1 install flathub io.github.zyedidia.micro
+	$1 install flathub io.github.zyedidia.micro
 }
 
 remove_flatpak() { # $1 means flatpak compatible
-	$xSUDO $1 remove io.github.zyedidia.micro
+	$1 remove io.github.zyedidia.micro
 }
 
 # choco update will be called before install_choco and remove_choco
