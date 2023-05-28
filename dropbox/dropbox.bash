@@ -48,10 +48,10 @@ install_apt() {
 		ARCH="amd64"
 		BINARY="https://www.dropbox.com/download?dl=packages/ubuntu/${xNAME}_${xVERSION}_$ARCH.deb"
 	else
-		install_any
+		$XPM log error "Architecture $xARCH is not supported, try -m any or -m flatpak"
 		return
 	fi
-
+	$XPM log info "Downloading $BINARY"
 	local file
 	file="$($XPM get "$BINARY" --no-progress --no-user-agent)"
 	$xSUDO dpkg -i "$file"
@@ -72,10 +72,10 @@ install_dnf() {
 		ARCH="x86_64"
 		BINARY="https://www.dropbox.com/download?dl=packages/fedora/nautilus-dropbox-$xVERSION-1.fedora.$ARCH.rpm"
 	else
-		install_any
+		$XPM log error "Architecture $xARCH is not supported, try -m any or -m flatpak"
 		return
 	fi
-
+	$XPM log info "Downloading $BINARY"
 	local file
 	file="$($XPM get "$BINARY" --no-progress --no-user-agent)"
 	$1 "$file"
