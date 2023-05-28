@@ -31,7 +31,7 @@ install_any() {
 		OS="$xOS"
 		ARCH="$xARCH"
 		if [[ $ARCH == "x86_64" ]]; then
-			ARCH="-64"
+			ARCH="-x64"
 		else
 			ARCH="-$xARCH"
 		fi
