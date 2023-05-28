@@ -88,3 +88,12 @@ install_flatpak() {
 remove_flatpak() {
 	$1 remove com.dropbox.Client
 }
+
+install_swupd() {
+	$1 bundle-add desktop
+	flatpak install flathub com.dropbox.Client
+}
+
+remove_swupd() {
+	flatpak remove com.dropbox.Client
+}
