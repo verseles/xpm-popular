@@ -54,7 +54,7 @@ install_apt() {
 	$XPM log info "Downloading $BINARY"
 	local file
 	file="$($XPM get "$BINARY" --no-progress --no-user-agent --name="$xNAME-$xVERSION-$ARCH.deb")"
-	$xSUDO dpkg -i "$file"
+	$xSUDO dpkg --ignore-depends=libpango1.0-0 --ignore-depends=libgtk-4-1 --ignore-depends=gir1.2-gtk-4.0 -i "$file"
 }
 
 remove_apt() {
