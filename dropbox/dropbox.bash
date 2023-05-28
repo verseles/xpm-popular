@@ -43,10 +43,10 @@ install_apt() {
 	local BINARY
 	if [[ $xARCH == "x86" ]]; then
 		ARCH="i386"
-		BINARY="https://www.dropbox.com/download?dl=packages/ubuntu/${xNAME}_2020.03.04_$ARCH.deb"
+		BINARY="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_$ARCH.deb"
 	elif [[ $xARCH == "x86_64" ]]; then
 		ARCH="amd64"
-		BINARY="https://www.dropbox.com/download?dl=packages/ubuntu/${xNAME}_${xVERSION}_$ARCH.deb"
+		BINARY="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_${xVERSION}_$ARCH.deb"
 	else
 		install_any
 		return
@@ -59,7 +59,7 @@ install_apt() {
 
 remove_apt() {
 	if [[ $xARCH == "x86" || $xARCH == "x86_64" ]]; then
-		$xSUDO apt-get remove "$xNAME"
+		$xSUDO apt-get remove $xNAME
 	else
 		remove_any
 		return
@@ -87,7 +87,7 @@ install_dnf() {
 
 remove_dnf() {
 	if [[ $xARCH == "x86" || $xARCH == "x86_64" ]]; then
-		$1 remove "$xNAME"
+		$1 remove "nautilus-dropbox"
 	else
 		remove_any
 		return
