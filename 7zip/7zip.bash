@@ -21,10 +21,13 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 }
 
 install_pacman() {
+	if $1 -Qs p7zip >/dev/null 2>&1; then
+		$XPM log warning "Removing p7zip package as it conflicts with 7-zip-full"
+		$1 -R p7zip
+	fi
 	$1 -S 7-zip-full
 }
 
 remove_pacman() {
 	$1 -R 7-zip-full
 }
-
