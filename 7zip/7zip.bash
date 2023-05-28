@@ -20,9 +20,6 @@ validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNA
 }
 
 install_any() {
-
-	echo $xARCH
-	exit 1
 	local OS
 	local VERSION
 	local ARCH
@@ -33,6 +30,25 @@ install_any() {
 	else
 		OS="$xOS"
 		ARCH="$xARCH"
+		if [[ $ARCH == "x86_64" ]]; then
+			ARCH="-64"
+		else
+			ARCH="-$xARCH"
+		fi
 	fi
 	local binary="https://7-zip.org/a/7z$VERSION-$OS$ARCH.tar.xz"
+	local file
+
+	file="$($XPM get "$binary" --no-progress --no-user-agent)"
+	$xSUDO mkdir -p "/opt/$xNAME"
+	$xSUDO tar xvf "$file" -C "/opt/$xNAME"
+	$xSUDO ln -sf "/opt/$xNAME/7zz" "$xBIN/7zz"
+	$xSUDO ln -sf "/opt/$xNAME/7zzs" "$xBIN/7zzs"
+	$xSUDO ln -sf "/opt/$xNAME/7zz" "$xBIN/7z"
+	$xSUDO ln -sf "/opt/$xNAME/7zz" "$xBIN/7za"
+	$xSUDO ln -sf "/opt/$xNAME/7zz" "$xBIN/7zr"
+}
+
+remove_any() {
+	$xSUDO rm -rf "/opt/$xNAME" "$xBIN/7zz" "$xBIN/7zzs" "$xBIN/7z" "$xBIN/7za" "$xBIN/7zr"
 }

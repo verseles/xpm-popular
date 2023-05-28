@@ -25,8 +25,9 @@ validate() {
 }
 
 install_any() {
+    local binary="http://archive.mozilla.org/pub/firefox/releases/$xVERSION/linux-x86_64/en-US/firefox-$xVERSION.tar.bz2"
     local file
-    file="$($XPM get "http://archive.mozilla.org/pub/firefox/releases/$xVERSION/linux-x86_64/en-US/firefox-$xVERSION.tar.bz2" --no-progress --no-user-agent --name="$xNAME-$xVERSION.tar.bz2")"
+    file="$($XPM get $binary --no-progress --no-user-agent)"
     $xSUDO mkdir -p "/opt/$xNAME"
     $xSUDO tar xvf "$file" -C "/opt"
     $xSUDO ln -sf "/opt/$xNAME/$xNAME" "$xBIN/$xNAME"
