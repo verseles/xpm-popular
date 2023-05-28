@@ -53,7 +53,7 @@ install_apt() {
 	fi
 	$XPM log info "Downloading $BINARY"
 	local file
-	file="$($XPM get "$BINARY" --no-progress --no-user-agent)"
+	file="$($XPM get "$BINARY" --no-progress --no-user-agent --name="$xNAME-$xVERSION-$ARCH.deb")"
 	$xSUDO dpkg -i "$file"
 }
 
@@ -77,7 +77,7 @@ install_dnf() {
 	fi
 	$XPM log info "Downloading $BINARY"
 	local file
-	file="$($XPM get "$BINARY" --no-progress --no-user-agent)"
+	file="$($XPM get "$BINARY" --no-progress --no-user-agent --name="$xNAME-$xVERSION-$ARCH.rpm")"
 	$1 "$file"
 }
 
