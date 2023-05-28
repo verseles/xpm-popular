@@ -26,7 +26,7 @@ install_any() {
 	file="$($XPM get "$SOURCE" --no-progress --no-user-agent)"
 	$xSUDO mkdir -p "/opt/$xNAME"
 	$xSUDO tar xjf "$file" -C "/opt/$xNAME"
-	cd "/opt/$xNAME"
+	cd "/opt/$xNAME/nautilus-dropbo*"
 	./configure
 	make
 	$xSUDO make install
