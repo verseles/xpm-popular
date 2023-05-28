@@ -80,12 +80,9 @@ install_dnf() {
 		install_any
 		return
 	fi
-	$XPM log info "Downloading $BINARY"
 	local file
 	file="$($XPM get "$BINARY" --no-progress --no-user-agent --name="$xNAME-$xVERSION-$ARCH.rpm")"
-	$XPM log info "Installing $file"
-	$XPM log info "Command -$1 $file-"
-	$1 "$file"
+	$1 install "$file"
 }
 
 remove_dnf() {
@@ -102,7 +99,6 @@ install_flatpak() {
 
 	RANDOM=$(cat /proc/sys/kernel/random/uuid)
 
-	
 }
 
 remove_flatpak() {
