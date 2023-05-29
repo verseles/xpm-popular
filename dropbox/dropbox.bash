@@ -106,9 +106,9 @@ remove_flatpak() {
 
 install_swupd() {
 	$1 bundle-add desktop
-	flatpak install flathub com.dropbox.Client
+	flatpak -y --noninteractive install flathub com.dropbox.Client
 }
 
 remove_swupd() {
-	flatpak remove com.dropbox.Client
+	flatpak -y --noninteractive remove com.dropbox.Client
 }
