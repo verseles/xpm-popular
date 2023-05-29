@@ -96,10 +96,8 @@ remove_dnf() {
 }
 
 install_flatpak() {
+	echo "$1 install flathub com.dropbox.Client"
 	$1 install flathub com.dropbox.Client
-
-	RANDOM=$(cat /proc/sys/kernel/random/uuid)
-
 }
 
 remove_flatpak() {
