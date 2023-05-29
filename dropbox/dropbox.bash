@@ -17,7 +17,14 @@ readonly xREQUIRES=()
 readonly xCONFLICTS=()
 
 validate() { # $1 is the path to executable from $xPROVIDES (if defined) or $xNAME
-	$1
+    if [[ $hasFlatpak == true && $(flatpak list | grep $xNAME) ]]; then
+        exit 0
+    fi
+    if [[ -x "$(command -v "$1")" ]]; then
+        exit 0
+    fi
+
+    exit 1
 }
 
 install_any() {

@@ -13,8 +13,8 @@ readonly xPROVIDES=("micro")
 
 # Here you can inform if this package is well-known to some package manager and is installed using xNAME
 # it is good for batch install and remove, when informed here, you can safely remove install_(PM here)
-# and remove_(PM here) function. Example: readonly xDEFAULT='apt' let you remove install_apt and remove_apt
-readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'termux')
+# and remove_(PM here) function. Example: readonly xDEFAULT='apt' let omit install_apt and remove_apt
+readonly xDEFAULT=('apt')
 
 # variables which is dinamically set and available for use
 # $xCHANNEL

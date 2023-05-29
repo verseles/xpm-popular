@@ -11,6 +11,7 @@ readonly xLICENSE="MPL GPL LGPL"
 readonly xPROVIDES=("firefox")
 
 # by using xDEFAULT, it uses $xNAME as the package name and there is no need to use separate functions for each package manager
+# So nce you define this, there is no need to create a specfic function for mentioned package manager.
 readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'snap')
 
 validate() {
@@ -57,7 +58,6 @@ remove_flatpak() {
 }
 
 install_appimage() {
-    # https://github.com/srevinsaju/Firefox-Appimage/releases/download/firefox/firefox-113.0.r20230522134052-x86_64.AppImage
     # Thanks to https://github.com/srevinsaju/Firefox-Appimage/releases
     # @TODO: add support for channels
 
