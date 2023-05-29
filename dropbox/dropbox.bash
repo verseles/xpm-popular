@@ -96,7 +96,6 @@ remove_dnf() {
 }
 
 install_flatpak() {
-	echo "$1 install flathub com.dropbox.Client"
 	$1 install flathub com.dropbox.Client
 }
 
