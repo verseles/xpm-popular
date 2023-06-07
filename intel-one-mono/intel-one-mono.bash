@@ -16,7 +16,7 @@ readonly channel=$([[ $xCHANNEL == "ttf" ]] && echo "ttf" || echo "otf")
 
 validate() {
 	# check if the font is installed, if yes, return 0, otherwise return 1
-	fc-list | grep -i "$xNAME" >/dev/null
+	fc-list | grep -i "intelone-mono" >/dev/null
 }
 
 install_any() {
