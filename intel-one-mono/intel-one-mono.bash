@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2034 disable=SC2154 disable=SC2164 disable=SC2103
+# shellcheck disable=SC2034 disable=SC2154 disable=SC2164 disable=SC2103 disable=SC2155
 
 readonly xNAME="intel-one-mono"
 readonly xVERSION="1.2.0"
@@ -11,8 +11,8 @@ readonly xLICENSE="OFL1.1"
 # The list of functions that use the default name (xNAME) on the package manager (for batch install)
 readonly xDEFAULT=()
 
-readonly channel
-channel=$([[ $xCHANNEL == "ttf" ]] && echo "ttf" || echo "otf")
+readonly channel=$([[ $xCHANNEL == "ttf" ]] && echo "ttf" || echo "otf")
+
 
 validate() {
 	# check if the font is installed, if yes, return 0, otherwise return 1
