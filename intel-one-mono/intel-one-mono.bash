@@ -6,10 +6,13 @@ readonly xVERSION="1.2.0"
 readonly xTITLE="Intel One Mono Typeface"
 readonly xDESC="An expressive monospaced font family that's built with clarity, legibility, and the needs of developers in mind"
 readonly xURL="https://github.com/intel/intel-one-mono"
-readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
+readonly xARCHS=(any)
 readonly xLICENSE="OFL1.1"
 # The list of functions that use the default name (xNAME) on the package manager (for batch install)
 readonly xDEFAULT=()
+
+readonly channel
+channel=$([[ $xCHANNEL == "ttf" ]] && echo "ttf" || echo "otf")
 
 validate() {
 	# check if the font is installed, if yes, return 0, otherwise return 1
@@ -17,7 +20,7 @@ validate() {
 }
 
 install_any() {
-	local release="$xURL/releases/download/V$xVERSION/otf.zip"
+	local release="$xURL/releases/download/V$xVERSION/$channel.zip"
 	local zip
 
 	zip="$($XPM get "$release" --no-progress --no-user-agent)"
@@ -32,4 +35,13 @@ install_any() {
 
 remove_any() {
 	$xSUDO rm -rf "/usr/share/fonts/$xNAME"
+}
+
+
+install_pacman() {
+	$1 -S "$channel-intel-one-mono"
+}
+
+remove_pacman() {
+	$1 -R "$channel-intel-one-mono"
 }
