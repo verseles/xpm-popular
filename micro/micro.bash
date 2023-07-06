@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034 disable=SC2154 disable=SC2164 disable=SC2103
 # USE THIS FILE AS TEMPLATE FOR YOUR SCRIPT
 
 readonly xNAME="micro"
