@@ -6,7 +6,7 @@ readonly xVERSION="3.0.18"
 readonly xTITLE="VLC media player"
 readonly xDESC="A free and open-source, portable, cross-platform media player software and streaming media server"
 readonly xURL="https://www.videolan.org/vlc"
-readonly xARCHS=('linux64' 'linux32' 'linux-arm' 'linux-arm64' 'macos-arm64' 'macos' 'win32' 'win64' 'freebsd64' 'freebsd32' 'openbsd64' 'openbsd32' 'netbsd64' 'netbsd32')
+readonly xARCHS=('any')
 readonly xLICENSE="GPL-2.0-only"
 
 readonly xDEFAULT=('apt' 'pacman' 'dnf' 'choco' 'brew' 'zypper' 'snap')
