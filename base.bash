@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 # Enable immediate output on error. This is a POSIX option.
 set -o errexit
 # Treat undefined variables as an error. This is a POSIX option.
